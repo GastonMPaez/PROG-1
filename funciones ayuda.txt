@@ -1,0 +1,433 @@
+---------------------------------------------
+
+//Leer valor:
+
+void leer(string mensaje, int &valor){
+    cout << mensaje << endl;
+    cin >> valor;
+}
+
+---------------------------------------------
+
+//Leer float:
+
+void leer(string mensaje, float &valor){
+    cout << mensaje << endl;
+    cin >> valor;
+}
+
+---------------------------------------------
+
+//Leer char:
+
+void leer(string mensaje, char &valor){
+    cout << mensaje << endl;
+    cin >> valor;
+}
+
+---------------------------------------------
+
+//Leer string:
+
+void leer(string mensaje, string &valor){
+    cout << mensaje << endl;
+    cin >> valor;
+}
+
+---------------------------------------------
+
+//Cargar una Array
+
+for (int i = 0; i < longitud; i++)
+{
+    cout << "Ingrese el valor nro. del cunjunto 'A': " << i+1 << " de " << longitud << " : " <<endl;
+    cin >> arrayA[i];
+}
+
+---------------------------------------------    
+
+//Invertir Array:
+
+for(int i=0; i<longitud; i++) 
+{
+    arrayExtra[i] = arrayB[longitud-(i+1)];
+}
+
+---------------------------------------------
+
+//Suma de Array (valor interno):
+
+for (int i = 0; i < longitud; i++)
+{
+    arrayC[i] = arrayA[i] + arrayB[i];
+    cout << " " << arrayC[i];
+}
+
+---------------------------------------------
+
+//Burbujeo:
+
+void burbujeo(int matrizA[], int n){
+    int i, j, aux;
+    for (i = 0; i < n-1; i++)
+    {
+        for (j = 0; j < n-i-1; j++)
+        {
+            if(matrizA[j] > matrizA[j+1])
+            {
+                aux =   matrizA[j];
+                matrizA[j] =   matrizA[j+1];
+                matrizA[j+1] = aux;
+            }
+        }
+    }
+}
+
+---------------------------------------------
+
+//Burbujeo Mejorado:
+
+void burbuejoMejor(int arr[], int n) {
+    int i, j, aux;
+    i = 0;
+    bool ordenado = false;
+    while (i < n && !ordenado)
+    {
+        ordenado = true;
+
+        for (j = 0; j < n-i-1; j++)
+        {
+            if (arr[j] > arr[j+1])
+            {
+                aux = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = aux;
+                ordenado = false;
+            }
+        }
+        i++;
+    }
+}
+
+---------------------------------------------
+
+//Insercion:
+
+void insercion(int matrizA[], int n) {
+    int i, posicion, auxiliar;
+    
+    for (int i = 0; i < n; i++)
+    {
+        posicion = i;
+        auxiliar = matrizA[i];
+
+        while ((posicion>0) && (matrizA[posicion-1] > auxiliar))
+        {
+            matrizA[posicion] = matrizA[posicion-1];
+            posicion--;
+        }
+        matrizA[posicion] = auxiliar;
+    }
+    
+}
+
+---------------------------------------------
+
+//Seleccion:
+
+void seleccion(int matrizA[], int n){
+    int i, j, auxiliar, minimo;
+
+    for (int i = 0; i < n; i++)
+    {
+        minimo = i;
+        for (int j = i+1; j < n; j++)
+        {
+            if (matrizA[j] < matrizA[minimo])
+            {
+                minimo = j;
+            }
+        }
+        auxiliar = matrizA[i];
+        matrizA[i] = matrizA[minimo];
+        matrizA[minimo] = auxiliar;
+    }
+    
+}
+
+---------------------------------------------
+
+//Mostrar la matriz (Ascendente):
+
+cout << "Orden Ascendente: ";
+for (int i = 0; i < n; i++)
+{
+    cout << matrizA[i];
+}
+    
+---------------------------------------------
+
+//Mostrar la matriz (Descendnete):
+
+cout << "Orden Descendnete: ";
+for (int i = n; i > 0; i--)
+{
+    cout << matrizA[i];
+}
+    
+---------------------------------------------
+
+//Busqueda Secuencial:
+
+void bSecuencial(int matrizA[], int n, int dato){
+    int i=0;
+    char band = 'F';
+    
+    while ((band == 'F') && (i < n))
+    {
+        if (matrizA[i] == dato)
+        {
+            band = 'V';
+        }
+        i++;
+    }
+
+    if (band == 'F')
+    {
+        cout << "El numero deseado no existe" << endl;
+    }
+    else if (band == 'V')
+    {
+      cout << "El numero: " << dato << " se encuenta en la posicion: " << i-1 << endl;
+    }
+}
+
+---------------------------------------------
+
+//Busqueda Binaria:
+
+void bBinaria(int matrizA[], int n, int dato){
+    int inferior = 0;
+    int superior = n;
+    int mitad = 0;
+    char band= 'F';
+    
+    while ((inferior+1) !=superior)
+    {
+       mitad = (inferior + superior)/2;
+       
+       if (matrizA[mitad] == dato)
+       {
+           band= 'V';
+           break;
+       }
+
+       if (matrizA[mitad] > dato)
+       {
+           superior = mitad;
+           mitad = (inferior+superior)/2;
+       }
+
+       if (matrizA[mitad] < dato)
+       {
+           inferior = mitad;
+           mitad = (inferior+superior)/2;
+       }
+    }
+    
+    if (band == 'V')
+    {
+        cout << "El numero " << dato << " se encuenta en la posicion " << mitad << endl;
+    }
+    else{
+        cout << "El numero no existe en el vector.";
+    }
+}
+
+
+int busquedaBinaria(int arr[], int n, int x) {
+
+    int inicio = 0;
+    int fin = n -1;
+
+    while (fin >= inicio) {
+        int mitad = inicio + (fin - inicio) / 2;
+        
+        if (arr[mitad] == x)
+        return mitad ;
+        
+        if (arr[mitad] > x) {
+        fin = mitad - 1; //Cambio el limite superior
+        }
+        else {
+            inicio = mitad + 1; // Cambio el limite inferior
+            }
+    }
+
+return -1;
+}
+
+---------------------------------------------
+
+//Estructuras:
+
+struct 'xxxxxx' {
+    char
+    int
+    float
+    string
+};
+
+
+int main(){
+
+    'xxxxxx' 'yyyy';
+
+}
+
+---------------------------------------------
+
+//Corte de Control
+
+void corteDeControl(Vendedores vec[], int n) {
+    int i = 0;
+    int codigoMejorVendedor=0;
+    float totalMejorVendedor=0;
+    int key;
+
+    while (i < n && vec[i].codigoV != 0)
+    {
+        key = vec[i].codigoV;
+        float totalVendedor;
+
+        while (i < n && key == vec[i].codigoV && vec[i].codigoV != 0)
+        {
+           totalVendedor += vec[i].monto;
+
+           i++;
+        }
+        
+        if (totalVendedor > totalMejorVendedor || totalMejorVendedor == 0)
+        {
+            codigoMejorVendedor = key;
+            totalMejorVendedor = totalVendedor;
+        }
+        
+    }
+    
+}
+
+---------------------------------------------
+
+int calcularFecha (int fechaC){
+    int dia=0;
+    int mes=0;
+    int mesC=0;
+    int anio=0;
+
+    anio = fechaC / 10000;
+    mes = (fechaC % 10000);
+    mesC = mes / 100;
+    dia = fechaC % 100;
+
+    cout << "Dia: " << dia << " Mes: " << mesC << " Anio: " << anio << endl;
+
+ return 0;
+}
+
+-----------------------------------------------------------------------------------
+
+//Apareo
+
+void apareo(Alumno vecA[], int n, Alumno vecB[], int m, Alumno vecC[], int &k)
+{
+    // Contadores para la posicion de los vectores A y B.
+
+    int i = 0, j = 0;
+    
+    // Contador para posicionarse en el vector resultante.
+    
+    k = 0;
+    
+    // Mientras pueda comparar valores (al menos uno de los vectores tiene valor)
+    
+    while (i < n && j < m) {
+    
+    // Comparo los valores de los vectores
+    
+    if (vecA[i].legajo < vecB[j].legajo) {
+    
+        // Coloco el elemento de A porque es menor
+    
+        vecC[k] = vecA[i];
+    
+        // Me muevo en el vector A
+    
+        i++;
+    
+        } else {
+        vecC[k] = vecB[j];
+        j++;
+        }
+    
+        // Incremento el contador de la posicion del vector resultante
+        k++;
+    }
+    // Paso todos los elementos restantes de A
+    while(i < n) {
+    vecC[k] = vecA[i];
+    i++;
+    k++;
+    }
+    // Paso todos los elementos restantes de B
+    
+    while(j < m) {
+    vecC[k] = vecB[j];
+    j++;
+    k++;
+    }
+}
+
+------------------------------------------------------------------------------------
+
+// Vector N numeros solo par
+
+  while (cantPares < n)
+ {
+    if (num % 2 == 0)
+    {
+        pares[cantPares]=num;
+        cantPares++;
+    }
+    num++;
+ }
+
+------------------------------
+
+void imprimirValores(int vec[], int cantidad, int sumaTotal){
+
+    if (sumaTotal > 0)
+    {
+        cout << "Elementos Impares: ";
+        for (int i = 0; i < cantidad; i++)
+        {
+            if (vec[i] % 2 != 0)
+            {
+                cout << vec[i] << " - ";
+            }
+        }
+    } else{
+
+        cout << "Otros Valores: ";
+        for (int i = 0; i < cantidad; i++)
+        {
+            if (vec[i] % 2 == 0)
+            {
+                cout << vec[i] << " - ";
+            }
+            
+        }
+        
+    }
+    
+}
